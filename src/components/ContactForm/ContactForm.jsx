@@ -1,5 +1,11 @@
 import { nanoid } from 'nanoid';
 import { Component } from 'react';
+import {
+  ContactFormContainer,
+  FormButton,
+  FormInput,
+  FormLabel,
+} from './ContactForm.styled';
 
 export class ContactForm extends Component {
   state = {
@@ -20,7 +26,7 @@ export class ContactForm extends Component {
     if (name.trim() === '' || number.trim() === '') return;
 
     const isExistingContact = contacts.some(
-      contact => contact.name.toLowerCase === name.toLowerCase
+      contact => contact.name.toLowerCase() === name.toLowerCase()
     );
     if (isExistingContact) {
       alert(`${name} is already in contacts.`);
@@ -36,9 +42,9 @@ export class ContactForm extends Component {
   render() {
     const { name, number } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label htmlFor="nameInput">Name</label>
-        <input
+      <ContactFormContainer onSubmit={this.handleSubmit}>
+        <FormLabel htmlFor="nameInput">Name</FormLabel>
+        <FormInput
           id="nameInput"
           type="text"
           name="name"
@@ -48,8 +54,8 @@ export class ContactForm extends Component {
           value={name}
           onChange={this.handleNameChange}
         />
-        <label htmlFor="numberInput">Number</label>
-        <input
+        <FormLabel htmlFor="numberInput">Number</FormLabel>
+        <FormInput
           id="numberInput"
           type="tel"
           name="number"
@@ -59,8 +65,8 @@ export class ContactForm extends Component {
           value={number}
           onChange={this.handleNumberChange}
         />
-        <button type="submit">Add contact</button>
-      </form>
+        <FormButton type="submit">Add contact</FormButton>
+      </ContactFormContainer>
     );
   }
 }
